@@ -1,5 +1,4 @@
 Buycall::Application.routes.draw do
-<<<<<<< HEAD
   resources :users
 
   resources :orders
