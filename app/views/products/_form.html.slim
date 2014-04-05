@@ -7,15 +7,15 @@
           li = message
 
   .field
-    = f.label :name
+    = f.label :name, "商品名"
     = f.text_field :name
   .field
-    = f.label :name_read
+    = f.label :name_read, "商品名のふりがな"
     = f.text_field :name_read
   .field
-    = f.label :price
+    = f.label :price, "価格（単位：円）"
     = f.number_field :price
   .field
-    = f.label :count
+    = f.label :count, "商品の数（単位：個）"
     = f.number_field :count
   .actions = f.submit '出品する', class: "btn btn-gray"

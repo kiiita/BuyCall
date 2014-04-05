@@ -50,6 +50,10 @@
     }
     .items__box__body {
       border-bottom: 1px solid $line_color; 
+      h3 {
+        font-size: 18px;
+        margin-top: 0px;
+      }
       .items__box__body__person {
         p {
           display: inline-block;
