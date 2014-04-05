@@ -1,3 +1,56 @@
 // Place all the styles related to the orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import  'module/module';
+
+.items {
+  .items__box {
+    border: 1px solid $line_color;
+    p {
+      margin:0;
+    }
+    > div {
+      padding: 10px;
+    }
+    .items__box__header {
+      border-bottom: 1px solid $line_color; 
+      background-color: $main-color;
+      p {
+        display: inline-block;
+        margin-right: 1em;
+        color: #fff;
+        border-color: #fff;
+      }
+    }
+    .items__box__body {
+      border-bottom: 1px solid $line_color; 
+      .items__box__body__person {
+        p {
+          display: inline-block;
+        }
+        p.purchased-size {
+          border: 1px solid $line_color;
+          padding: 1px 3px;
+          @include border_radius(6px);
+          margin-left: 4px;
+        }
+      }
+
+    }
+    .items__box__footer {
+      p {
+        display: inline-block;
+        margin-right: 5px;
+        &:after {
+          content: "/";
+          margin-left: 5px;
+        }
+        &:last-child:after {
+          content: "";
+        }
+      }
+  
+    }
+  }
+}

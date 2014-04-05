@@ -6,6 +6,12 @@ Buycall::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
+  root :to => 'home#index'
+
+  resources :products
+  resources :orders
+  resources :users
+
   get "twiml/start"
   get "twiml/ask_shop"
   get "twiml/ask_product"
@@ -15,9 +21,5 @@ Buycall::Application.routes.draw do
   get "twiml/ask_address"
   get "twiml/confirm_address"
   get "twiml/finish"
-
-  resources :users
-  resources :orders
-  root :to => 'home#index'
 
 end
