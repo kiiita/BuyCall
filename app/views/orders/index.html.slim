@@ -11,8 +11,8 @@
           .status
             p 未発送
         .items__box__body
-          - order.products.each do |product|
             p.round-list 商品名
-            p = product.user.name
-            p.round-list 出品数
+            p = order.user.name
+            p = order.product.name
+            p = order.product.count
         .items__box__footer

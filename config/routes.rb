@@ -2,6 +2,7 @@ Buycall::Application.routes.draw do
   root :to => 'home#index'
 
   resources :products
+  resources :orders
 
   get "orders", :to => "orders#index"
 
