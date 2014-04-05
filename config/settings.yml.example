@@ -1,4 +1,5 @@
 defaults: &defaults
+  webpay: 'ccccccccccccccccccc'
   twilio:
     caller_id: '+8100000000'
     account_sid: 'xxxxxxxxxxxxxxxxxxxxxxxx'
