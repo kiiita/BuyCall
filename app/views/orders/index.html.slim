@@ -4,15 +4,10 @@
     h2 出品リスト一覧 
     - @orders.each do |order|
       .items__box
-        .items__box__header
-          p.round-list 商品ID
+        .items__box__body.orders-list
+          p.round-list 注文ID
           p = order.product_id
-          br
+          p.round-list 注文者の氏名
+          p = order.user.name
           .status
             p 未発送
-        .items__box__body
-            p.round-list 商品名
-            p = order.user.name
-            p = order.product.name
-            p = order.product.count
-        .items__box__footer

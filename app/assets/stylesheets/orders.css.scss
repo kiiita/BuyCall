@@ -4,3 +4,15 @@
 
 @import  'module/module';
 
+.orders-list {
+  position: relative;
+  .status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: $main_color;
+    padding: 3px 6px;
+    @include border_radius;
+    color: #fff;
+  }
+}

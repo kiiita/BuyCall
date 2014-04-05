@@ -1,0 +1,17 @@
+.container
+  h1 注文リスト
+  .items
+    h2 出品リスト一覧 
+    .items__box
+      .items__box__header
+        p.round-list 商品ID
+        p = @orders.product_id
+        br
+        .status
+          p 未発送
+      .items__box__body
+          p.round-list 商品名
+          p = @orders.user.name
+          p = @orders.product.name
+          p = @orders.product.count
+      .items__box__footer
