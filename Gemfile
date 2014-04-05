@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.0.2'
-gem 'mysql2'
+gem 'sqlite3'
 gem 'slim-rails'
 gem 'uglifier', '>= 1.3.0'
 
