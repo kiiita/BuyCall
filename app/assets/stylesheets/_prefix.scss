@@ -1,0 +1,38 @@
+
+$set_prefix: -webkit-, -moz-, -ms-, -o-, '';
+
+@mixin border_radius($br_value: 4px) {
+  @each $prefix in $set_prefix {
+    #{$prefix}border-radius: $br_value
+  }
+}
+
+@mixin tr_border_radius($br_value: 4px) {
+  @each $prefix in $set_prefix {
+    #{$prefix}border-top-right-radius: $br_value
+  }
+}
+
+@mixin tl_border_radius($br_value: 4px) {
+  @each $prefix in $set_prefix {
+    #{$prefix}border-top-left-radius: $br_value
+  }
+}
+
+@mixin br_border_radius($br_value: 4px) {
+  @each $prefix in $set_prefix {
+    #{$prefix}border-bottom-right-radius: $br_value
+  }
+}
+
+@mixin bl_border_radius($br_value: 4px) {
+  @each $prefix in $set_prefix {
+    #{$prefix}border-bottom-left-radius: $br_value
+  }
+}
+
+@mixin transition($transition_value: 0.3s, $move_type: ease-in-out) {
+  @each $prefix in $set_prefix {
+    #{$prefix}transition: all $transition_value $move_type
+  }
+}
