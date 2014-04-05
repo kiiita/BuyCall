@@ -1,4 +1,10 @@
 Buycall::Application.routes.draw do
+
+  get "twiml/start"
+  get "twiml/ask_region"
+  get "twiml/question"
+  get "twiml/finish"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

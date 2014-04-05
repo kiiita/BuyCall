@@ -1,8 +1,8 @@
 defaults: &defaults
   twilio:
-    caller_id: '+815031596100'
-    account_sid: 'ACc4f73f3a82ecfe7ea17d0cae13b611cd'
-    auth_token: 'e196f1e803969e9e1ea3945bb0c985a4'
+    caller_id: '+8100000000'
+    account_sid: 'xxxxxxxxxxxxxxxxxxxxxxxx'
+    auth_token: 'xxxxxxxxxxxxxxxxxxxxx'
 
 development:
   <<: *defaults
