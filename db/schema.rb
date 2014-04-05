@@ -14,9 +14,10 @@
 ActiveRecord::Schema.define(version: 20140405055756) do
 
   create_table "orders", force: true do |t|
-    t.integer  "user_id",                null: false
-    t.integer  "product_id",             null: false
-    t.integer  "count",      default: 1, null: false
+    t.integer  "user_id",                          null: false
+    t.integer  "product_id",                       null: false
+    t.integer  "count",            default: 1,     null: false
+    t.boolean  "confirm_finished", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
