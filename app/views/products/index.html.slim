@@ -15,8 +15,9 @@
         .items__box__body
           h3 購入者一覧
           .items__box__body__person
-            p ヤマダタロウ
-            p.purchased-size 1個
+            - product.orders.each do |order|
+              p = order.user.name
+              p = order.user.count
         .items__box__footer
           p = link_to '詳細を見る', product
           p = link_to '商品情報を変更する', edit_product_path(product)

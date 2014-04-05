@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20140405055756) do
     t.string   "zip"
     t.string   "address1"
     t.string   "address2"
+    t.integer  "count"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
