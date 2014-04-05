@@ -1,25 +1,23 @@
-h1 Listing products
+.container
+  h1 管理画面
+  = link_to('新しい商品を追加', new_product_path, class: "btn btn-primary")
 
-table
-  tr
-    th Name
-    th Name read
-    th Price
-    th Count
-    th
-    th
-    th
-
-  - @products.each do |product|
-    tr
-      td = product.name
-      td = product.name_read
-      td = product.price
-      td = product.count
-      td = link_to 'Show', product
-      td = link_to 'Edit', edit_product_path(product)
-      td = link_to 'Destroy', product, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Product', new_product_path
+  hr
+  h2 menu 
+  .items
+    - @products.each do |product|
+      .items__box
+        .items__box__header
+          p.round-list 商品ID
+          p = product.id
+          p.round-list 商品名
+          p = product.name
+        .items__box__body
+          h3 購入者一覧
+          .items__box__body__person
+            p ヤマダタロウ
+            p.purchased-size 1個
+        .items__box__footer
+          p = link_to '詳細を見る', product
+          p = link_to '商品情報を変更する', edit_product_path(product)
+          p = link_to '出品を停止する', product, data: {:confirm => 'Are you sure?'}, :method => :delete
