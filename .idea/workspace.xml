@@ -9,12 +9,12 @@
     <file path="/seeds.rb" changelist="86ac62d7-8629-481a-b888-2be8bc82bf85" time="1396679172418" ignored="false" />
     <file path="/orders_controller.rb" changelist="86ac62d7-8629-481a-b888-2be8bc82bf85" time="1396675676367" ignored="false" />
     <file path="/order.rb" changelist="86ac62d7-8629-481a-b888-2be8bc82bf85" time="1396678256336" ignored="false" />
-    <file path="/routes.rb" changelist="86ac62d7-8629-481a-b888-2be8bc82bf85" time="1396680313194" ignored="false" />
+    <file path="/routes.rb" changelist="86ac62d7-8629-481a-b888-2be8bc82bf85" time="1396681515654" ignored="false" />
     <file path="/product.rb" changelist="86ac62d7-8629-481a-b888-2be8bc82bf85" time="1396678280819" ignored="false" />
     <file path="/user.rb" changelist="86ac62d7-8629-481a-b888-2be8bc82bf85" time="1396678360697" ignored="false" />
     <file path="/edit.html.slim" changelist="86ac62d7-8629-481a-b888-2be8bc82bf85" time="1396678565136" ignored="false" />
     <file path="/_form.html.slim" changelist="86ac62d7-8629-481a-b888-2be8bc82bf85" time="1396679663562" ignored="false" />
-    <file path="/index.html.slim" changelist="86ac62d7-8629-481a-b888-2be8bc82bf85" time="1396681249316" ignored="false" />
+    <file path="/index.html.slim" changelist="86ac62d7-8629-481a-b888-2be8bc82bf85" time="1396681560825" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,16 +55,16 @@
       <file leaf-file-name="routes.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/routes.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="21" selection-start="278" selection-end="284" vertical-scroll-proportion="0.0">
+            <state line="10" column="46" selection-start="316" selection-end="316" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.slim" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.html.slim" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/orders/index.html.slim">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="36" selection-start="498" selection-end="503" vertical-scroll-proportion="0.7681941">
+            <state line="13" column="36" selection-start="0" selection-end="660" vertical-scroll-proportion="-8.125">
               <folding />
             </state>
           </provider>
@@ -79,10 +79,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.slim" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.html.slim" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/products/index.html.slim">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="51" selection-start="250" selection-end="250" vertical-scroll-proportion="-9.208333">
+            <state line="18" column="20" selection-start="424" selection-end="424" vertical-scroll-proportion="0.68037975">
               <folding />
             </state>
           </provider>
@@ -116,9 +116,9 @@
         <option value="$PROJECT_DIR$/app/views/orders/edit.html.slim" />
         <option value="$PROJECT_DIR$/db/seeds.rb" />
         <option value="$PROJECT_DIR$/app/views/orders/_form.html.slim" />
+        <option value="$PROJECT_DIR$/app/views/orders/index.html.slim" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/app/views/products/index.html.slim" />
-        <option value="$PROJECT_DIR$/app/views/orders/index.html.slim" />
       </list>
     </option>
   </component>
@@ -210,28 +210,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="products" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BuyCall" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BuyCall" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="orders" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -642,13 +620,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="21" selection-start="278" selection-end="284" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/products/index.json.jbuilder">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -656,16 +627,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/products/index.html.slim">
+    <entry file="file://$PROJECT_DIR$/app/views/orders/index.html.slim">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="51" selection-start="250" selection-end="250" vertical-scroll-proportion="-9.208333">
+        <state line="13" column="36" selection-start="0" selection-end="660" vertical-scroll-proportion="-8.125">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/orders/index.html.slim">
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="36" selection-start="498" selection-end="503" vertical-scroll-proportion="0.7681941">
+        <state line="10" column="46" selection-start="316" selection-end="316" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/products/index.html.slim">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="20" selection-start="424" selection-end="424" vertical-scroll-proportion="0.68037975">
           <folding />
         </state>
       </provider>
