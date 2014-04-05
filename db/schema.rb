@@ -32,9 +32,11 @@ ActiveRecord::Schema.define(version: 20140405055756) do
   create_table "users", force: true do |t|
     t.string   "tel"
     t.string   "name"
+    t.string   "name_voice_url"
     t.string   "zip"
     t.string   "address1"
     t.string   "address2"
+    t.string   "address2_voice_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
