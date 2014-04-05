@@ -10,14 +10,11 @@
           p.round-list 商品ID
           p = product.id
           br
+        .items__box__body
           p.round-list 商品名
           p = product.name
-        .items__box__body
-          h3 購入者一覧
-          .items__box__body__person
-            - product.orders.each do |order|
-              p = order.user.name
-              p.purchased-size #{order.user.count} 個
+          p.round-list 出品数
+          p = product.count
         .items__box__footer
           p = link_to '商品情報を変更する', edit_product_path(product)
           p = link_to '出品を停止する', product, data: {:confirm => '一度削除するともとに戻すことはできません。出品を停止してもよろしいでしょうか？'}, :method => :delete

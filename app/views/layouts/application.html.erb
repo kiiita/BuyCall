@@ -11,7 +11,11 @@
 </head>
 <body>
 
-<%= render 'layouts/navbar' %>
+<% if params[:controller].match(/home/) %>
+  <%= render 'layouts/before_login_navbar' %>
+<% else %>
+  <%= render 'layouts/navbar' %>
+<% end %>
 <%= yield %>
 <%= render 'layouts/footer' %>
 
