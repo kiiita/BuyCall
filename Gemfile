@@ -13,6 +13,7 @@ gem 'bootstrap-sass', '3.0.2.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
+gem 'settingslogic'
 
 group :doc do
   gem 'sdoc', require: false
