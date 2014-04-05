@@ -9,6 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require custum.css.scss
+ *= require bootstrap
+ *= require custom.css.scss
  *= require normalize.css
  */
