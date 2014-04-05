@@ -15,6 +15,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'settingslogic'
 gem 'twilio-ruby'
+gem 'rb-readline'
+gem 'webpay'
 
 group :doc do
   gem 'sdoc', require: false
