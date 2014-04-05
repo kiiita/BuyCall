@@ -14,28 +14,30 @@
 ActiveRecord::Schema.define(version: 20140405055756) do
 
   create_table "orders", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "product_id"
+    t.integer  "user_id",                null: false
+    t.integer  "product_id",             null: false
+    t.integer  "count",      default: 1, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "products", force: true do |t|
-    t.string   "name"
+    t.string   "name",                   null: false
     t.string   "name_read"
-    t.integer  "price"
-    t.integer  "count"
+    t.integer  "price",                  null: false
+    t.integer  "count",      default: 1, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
-    t.string   "tel"
+    t.string   "tel",                null: false
     t.string   "name"
+    t.string   "name_voice_url"
     t.string   "zip"
     t.string   "address1"
     t.string   "address2"
-    t.integer  "count"
+    t.string   "address2_voice_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

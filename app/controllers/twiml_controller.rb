@@ -7,30 +7,53 @@ class TwimlController < ApplicationController
   # Twilioの最初
   def start
     xml_str = Twilio::TwiML::Response.new do |response|
-      response.Say " バイ コール をご利用いただき ありがとう ございます。 ", :language => "ja-jp"
-      response.Redirect "#{Setting.app_host}/twiml/ask_shop", method: 'GET'
+      response.Say " バイ コール をご利用いただき ありがとう ございます。 ", language: "ja-jp"
+      response.Redirect "#{Setting.app_host}/twiml/ask_product", method: 'GET'
     end.text
 
     render xml: xml_str
   end
 
-  # エリアを聞く
-  def ask_shop
-    # TwiMLを作成
+  # # エリアを聞く
+  # def ask_shop
+  #   xml_str = Twilio::TwiML::Response.new do |response|
+  #     response.Gather timeout: 30, finishOnKey: '*', action: "#{Setting.app_host}/twiml/receive_shop", method: 'GET' do |gather|
+  #       gather.Say " ショップ アイディ を入力 してください。 入力が 完了したら シャープ を 押してください", language: "ja-jp"
+  #     end
+  #   end.text
+
+  #   render xml: xml_str
+  # end
+
+  # def receive_shop
+  #   xml_str = Twilio::TwiML::Response.new do |response|
+  #     response.Redirect "#{Setting.app_host}/twiml/ask_product", method: 'GET'
+  #   end.text
+
+  #   render xml: xml_str
+  # end
+
+  def ask_product
     xml_str = Twilio::TwiML::Response.new do |response|
-      response.Gather timeout: 30, finishOnKey: '*', action: "#{Setting.app_host}/twiml/ask_product", method: 'GET' do |gather|
-        gather.Say " ショップ アイディ を入力 してください。 入力が 完了したら アスタリスク を 押してください", :language => "ja-jp"
+      response.Gather timeout: 30, finishOnKey: '#', action: "#{Setting.app_host}/twiml/receive_product", method: 'GET' do |gather|
+        gather.Say " 商品 アイディ を入力 してください。 入力が 完了したら シャープ を 押してください", language: "ja-jp"
       end
     end.text
 
     render xml: xml_str
   end
 
-  def ask_product
-    # TwiMLを作成
+  def receive_product
     xml_str = Twilio::TwiML::Response.new do |response|
-      response.Gather timeout: 30, finishOnKey: '*', action: "#{Setting.app_host}/twiml/confirm_product", method: 'GET' do |gather|
-        gather.Say " 商品 アイディ を入力 してください。 入力が 完了したら アスタリスク を 押してください", :language => "ja-jp"
+      # 該当する商品がない場合
+      if params_pruduct.nil?
+        response.Say " 入力した アイディに 該当する 商品が見つかりません。", language: "ja-jp"
+        response.Redirect "#{Setting.app_host}/twiml/ask_product", method: 'GET'
+      else
+        response.Gather timeout: 30, finishOnKey: '', numDigits: 1, action: "#{Setting.app_host}/twiml/confirm_product/#{params_pruduct.id}", method: 'GET' do |gather|
+          gather.Say " 入力した商品 は #{params_pruduct.name_read} ですね。", language: "ja-jp"
+          gather.Say " よろしければ、1を。 修正したいかたは、9を押してください。", language: "ja-jp"
+        end
       end
     end.text
 
@@ -38,38 +61,137 @@ class TwimlController < ApplicationController
   end
 
   def confirm_product
-    # TwiMLを作成
+
     xml_str = Twilio::TwiML::Response.new do |response|
-      response.Gather timeout: 30, finishOnKey: '', numDigits: 1, action: "#{Setting.app_host}/twiml/finish", method: 'GET' do |gather|
-        gather.Say " 入力した商品 アイディは #{params[:Digits]} ですね。", :language => "ja-jp"
-        gather.Say " よろしければ、1を。 修正したいかたは、9を押してください。", :language => "ja-jp"
+      if params[:Digits].to_s == '1'
+        # 裁縫ユーザー
+        if @current_caller_user.zip
+          response.Redirect "#{Setting.app_host}/twiml/ask_order", method: 'GET'
+        else
+          response.Redirect "#{Setting.app_host}/twiml/ask_name", method: 'GET'
+        end
+      else
+        response.Redirect "#{Setting.app_host}/twiml/ask_product", method: 'GET'
       end
     end.text
 
     render xml: xml_str
   end
 
-  # def ask_shop
-  #   # TwiMLを作成
-  #   xml_str = Twilio::TwiML::Response.new do |response|
-  #     response.Gather timeout: 40, finishOnKey: '', numDigits: 1, action: "#{Setting.app_host}/twiml/question?q_num=1&user_id=#{twilio_current_user.id}" do |gather|
-  #       gather.Say "旅行 の 行き先 を 決めてください", :language => "ja-jp"
+  def ask_name
+    xml_str = Twilio::TwiML::Response.new do |response|
+      response.Say " お名前を 会話 してください。 入力が 完了したら シャープ を 押してください。", language: "ja-jp"
+      response.Record maxLength: '30', finishOnKey: '#', action: "#{Setting.app_host}/twiml/receive_name", :method => 'get'
+    end.text
 
-  #       Region.all.each do |region|
-  #         gather.Say "。 #{region.name} がいいかたは、 #{region.id} を", :language => "ja-jp"
-  #       end
+    render xml: xml_str
+  end
 
-  #       gather.Say "押してください", :language => "ja-jp"
-  #     end
-  #   end.text
+  def receive_name
+    @current_caller_user.update name_voice_url: params[:RecordingUrl]
 
-  #   render xml: xml_str
-  # end
+    xml_str = Twilio::TwiML::Response.new do |response|
+      response.Redirect "#{Setting.app_host}/twiml/ask_zip", method: 'GET'
+    end.text
 
-  # Twilioの最後
+    render xml: xml_str
+  end
+
+  def ask_zip
+    xml_str = Twilio::TwiML::Response.new do |response|
+      response.Gather timeout: 30, finishOnKey: '', numDigits: 7, action: "#{Setting.app_host}/twiml/receive_zip", method: 'GET' do |gather|
+        response.Say " 郵便番号を ハイフン無しで 入力 してください。", language: "ja-jp"
+      end
+
+    end.text
+
+    render xml: xml_str
+  end
+
+  def receive_zip
+    xml_str = Twilio::TwiML::Response.new do |response|
+
+      # 郵便番号が不正だったら
+      if params[:Digits].blank? || params[:Digits].length != 7
+        response.Say " 郵便番号 が不正です。", language: "ja-jp"
+        response.Redirect "#{Setting.app_host}/twiml/ask_zip", method: 'GET'
+
+      elsif ZipCode.find_address_by_code(params[:Digits]).nil?
+        response.Say " 郵便番号を に該当する住所が みつかりません。", language: "ja-jp"
+        response.Redirect "#{Setting.app_host}/twiml/ask_zip", method: 'GET'
+
+      else
+        @current_caller_user.update(zip: params[:Digits], address1: ZipCode.find_address_by_code(params[:Digits]))
+
+        response.Say " #{ZipCode.find_address_by_code(params[:Digits])} ですね。", language: "ja-jp"
+        response.Gather timeout: 30, finishOnKey: '', numDigits: 1, action: "#{Setting.app_host}/twiml/confirm_zip", method: 'GET' do |gather|
+          gather.Say " よろしければ、1を。 修正したいかたは、9を押してください。", language: "ja-jp"
+        end
+      end
+    end.text
+
+    render xml: xml_str
+  end
+
+  def confirm_zip
+    xml_str = Twilio::TwiML::Response.new do |response|
+      if params[:Digits].to_s == '1'
+        response.Redirect "#{Setting.app_host}/twiml/ask_address2", method: 'GET'
+      else
+        response.Redirect "#{Setting.app_host}/twiml/ask_zip", method: 'GET'
+      end
+    end.text
+
+    render xml: xml_str
+  end
+
+  # 追加の住所
+  def ask_address2
+    xml_str = Twilio::TwiML::Response.new do |response|
+      response.Say " 番地以降の 住所を 会話 してください。 入力が 完了したら シャープ を 押してください", language: "ja-jp"
+      response.Record maxLength: '60', finishOnKey: '#', action: "#{Setting.app_host}/twiml/receive_address2", :method => 'get'
+    end.text
+
+    render xml: xml_str
+  end
+
+  def receive_address2
+    @current_caller_user.update address2_voice_url: params[:RecordingUrl]
+
+    xml_str = Twilio::TwiML::Response.new do |response|
+      response.Redirect "#{Setting.app_host}/twiml/ask_order", method: 'GET'
+    end.text
+
+    render xml: xml_str
+  end
+
+  # 注文確認
+  def ask_order
+    xml_str = Twilio::TwiML::Response.new do |response|
+      response.Gather timeout: 30, finishOnKey: '', numDigits: 1, action: "#{Setting.app_host}/twiml/confirm_order", method: 'GET' do |gather|
+        gather.Say " ご注文を 確認いたします。", language: "ja-jp"
+        gather.Say " よろしければ、1を。 修正したいかたは、9を押してください。", language: "ja-jp"
+      end
+    end.text
+
+    render xml: xml_str
+  end
+
+  def confirm_order
+    xml_str = Twilio::TwiML::Response.new do |response|
+      if params[:Digits].to_s == '1'
+        response.Redirect "#{Setting.app_host}/twiml/finish", method: 'GET'
+      else
+        response.Redirect "#{Setting.app_host}/twiml/ask_product", method: 'GET'
+      end
+    end.text
+
+    render xml: xml_str
+  end
+
   def finish
     xml_str = Twilio::TwiML::Response.new do |response|
-      response.Say "ご注文ありがとうございました。　　　　のちほど 確認の電話をすることがあります。 ", :language => "ja-jp"
+      response.Say "ご注文ありがとうございました。　　　　のちほど ショップから 確認の電話をすることがあります。 ", language: "ja-jp"
     end.text
 
     render xml: xml_str
@@ -81,6 +203,14 @@ class TwimlController < ApplicationController
   def set_caller_user
     raise 'params[:Caller] is blank' if params[:Caller].blank?
     @current_caller_user ||= User.find_by(tel: params[:Caller]) || User.create(tel: params[:Caller])
+  end
+
+  def params_pruduct
+    @_product ||= Product.find_by(id: (params[:product_id] || params[:Digits]))
+  end
+
+  def _log_(obj)
+    puts "\n***#{obj.to_s}***\n"
   end
 
 end
