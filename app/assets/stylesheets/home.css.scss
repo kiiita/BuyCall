@@ -1,3 +1,30 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'module/module';
+
+.home {
+  text-align: center;
+  h1.title {
+    text-align: center;
+    font-family: 'Norican', cursive;
+    font-size: 52px;
+    color: #fff;
+  }
+  a.btn {
+    background-color: $main_color;
+    color: #fff;
+    margin-top: 200px;
+    z-index: 10;
+    margin-bottom: 200px;
+    border: 1px solid #fff;
+  }
+}
+
+.home-container {
+  height: 100%;
+  background-image: url(back2.jpg);
+  background-position: center center;
+  background-size: cover;
+}

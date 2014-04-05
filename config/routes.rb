@@ -6,7 +6,7 @@ Buycall::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  root :to => 'products#index'
+  root :to => 'home#index'
 
   resources :products
 

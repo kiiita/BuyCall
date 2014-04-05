@@ -1,0 +1,25 @@
+@import 'module/module';
+
+.footer {
+  margin-top: 80px;
+  padding: 10px 15px;
+  background-color: $main_color;
+  width: 100%;
+  height: 100px;
+  text-align: center;
+  p {
+    color: #fff;
+    letter-spacing: 0.05em;
+    font-weight: 100;
+    margin: 2px 0;
+    font-size: 14px;
+  }
+  p.logo {
+    font-family: 'Norican', cursive;
+    font-size: 20px;
+  }
+  p.team {
+    font-family: 'Fredericka the Great', cursive;
+    font-size: 16px;
+  }
+}
