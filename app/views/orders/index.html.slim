@@ -1,21 +1,20 @@
-h1 Listing orders
+.container
+  br
+  = link_to('新しい商品を追加', new_order_path, class: "btn btn-primary")
+  h1 Listing orders
 
-table
-  tr
-    th User
-    th Product
-    th
-    th
-    th
-
-  - @orders.each do |order|
+  table
     tr
-      td = order.user_id
-      td = order.product_id
-      td = link_to 'Show', order
-      td = link_to 'Edit', edit_order_path(order)
-      td = link_to 'Destroy', order, data: {:confirm => 'Are you sure?'}, :method => :delete
+      th User
+      th Product
+      th
+      th
+      th
 
-br
-
-= link_to 'New Order', new_order_path
+    - @orders.each do |order|
+      tr
+        td = order.user_id
+        td = order.product_id
+        td = link_to 'Show', order
+        td = link_to 'Edit', edit_order_path(order)
+        td = link_to 'Destroy', order, data: {:confirm => 'Are you sure?'}, :method => :delete
