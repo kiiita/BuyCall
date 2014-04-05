@@ -19,4 +19,4 @@
               p.purchased-size #{order.user.count} 個
         .items__box__footer
           p = link_to '商品情報を変更する', edit_product_path(product)
-          p = link_to '出品を停止する', product, data: {:confirm => 'Are you sure?'}, :method => :delete
+          p = link_to '出品を停止する', product, data: {:confirm => '一度削除するともとに戻すことはできません。出品を停止してもよろしいでしょうか？'}, :method => :delete

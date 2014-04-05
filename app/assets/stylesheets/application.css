@@ -17,5 +17,6 @@
  *= require home.css.scss
  *= require navbar.css.scss
  *= require normalize.css
- *= require orders.css
+ *= require orders.css.scss
+ *= require products.css.scss
  */
