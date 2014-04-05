@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Tel:
+  = @user.tel
+p
+  strong Name:
+  = @user.name
+p
+  strong Zip:
+  = @user.zip
+p
+  strong Address1:
+  = @user.address1
+p
+  strong Address2:
+  = @user.address2
+
+= link_to 'Edit', edit_user_path(@user)
+'|
+= link_to 'Back', users_path
