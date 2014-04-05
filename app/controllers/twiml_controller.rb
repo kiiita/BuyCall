@@ -14,29 +14,10 @@ class TwimlController < ApplicationController
     render xml: xml_str
   end
 
-  # # エリアを聞く
-  # def ask_shop
-  #   xml_str = Twilio::TwiML::Response.new do |response|
-  #     response.Gather timeout: 30, finishOnKey: '*', action: "#{Setting.app_host}/twiml/receive_shop", method: 'GET' do |gather|
-  #       gather.Say " ショップ アイディ を入力 してください。 入力が 完了したら シャープ を 押してください", language: "ja-jp"
-  #     end
-  #   end.text
-
-  #   render xml: xml_str
-  # end
-
-  # def receive_shop
-  #   xml_str = Twilio::TwiML::Response.new do |response|
-  #     response.Redirect "#{Setting.app_host}/twiml/ask_product", method: 'GET'
-  #   end.text
-
-  #   render xml: xml_str
-  # end
-
   def ask_product
     xml_str = Twilio::TwiML::Response.new do |response|
       response.Gather timeout: 30, finishOnKey: '#', action: "#{Setting.app_host}/twiml/receive_product", method: 'GET' do |gather|
-        gather.Say " 商品 アイディ を入力 してください。 入力が 完了したら シャープ を 押してください", language: "ja-jp"
+        gather.Say " 商品 番号 を入力 してください。 入力が 完了したら シャープ を 押してください", language: "ja-jp"
       end
     end.text
 
@@ -47,13 +28,36 @@ class TwimlController < ApplicationController
     xml_str = Twilio::TwiML::Response.new do |response|
       # 該当する商品がない場合
       if params_pruduct.nil?
-        response.Say " 入力した アイディに 該当する 商品が見つかりません。", language: "ja-jp"
+        response.Say " 入力した 番号に 該当する 商品が見つかりません。", language: "ja-jp"
         response.Redirect "#{Setting.app_host}/twiml/ask_product", method: 'GET'
       else
-        response.Gather timeout: 30, finishOnKey: '', numDigits: 1, action: "#{Setting.app_host}/twiml/confirm_product/#{params_pruduct.id}", method: 'GET' do |gather|
-          gather.Say " 入力した商品 は #{params_pruduct.name_read} ですね。", language: "ja-jp"
-          gather.Say " よろしければ、1を。 修正したいかたは、9を押してください。", language: "ja-jp"
-        end
+        response.Redirect "#{Setting.app_host}/twiml/ask_count/#{params_pruduct.id}", method: 'GET'
+        # response.Gather timeout: 30, finishOnKey: '', numDigits: 1, action: "#{Setting.app_host}/twiml/ask_count/#{params_pruduct.id}", method: 'GET' do |gather|
+        #   gather.Say " 入力した商品 は #{params_pruduct.name_read} ですね。", language: "ja-jp"
+        #   gather.Say " よろしければ、1を。 修正したいかたは、9を押してください。", language: "ja-jp"
+        # end
+      end
+    end.text
+
+    render xml: xml_str
+  end
+
+  # 商品の個数を選択
+  def ask_count
+    xml_str = Twilio::TwiML::Response.new do |response|
+      response.Gather timeout: 30, finishOnKey: '#', action: "#{Setting.app_host}/twiml/receive_product_and_count/#{params_pruduct.id}", method: 'GET' do |gather|
+        gather.Say " 商品 の個数 を入力 してください。 入力が 完了したら シャープ を 押してください", language: "ja-jp"
+      end
+    end.text
+
+    render xml: xml_str
+  end
+
+  def receive_product_and_count
+    xml_str = Twilio::TwiML::Response.new do |response|
+      response.Gather timeout: 30, finishOnKey: '', numDigits: 1, action: "#{Setting.app_host}/twiml/confirm_product/#{params_pruduct.id}/#{params_count}", method: 'GET' do |gather|
+        gather.Say " 入力した注文 は #{params_pruduct.name_read}、を、#{params_count}個、ですね。", language: "ja-jp"
+        gather.Say " よろしければ、1を。 修正したいかたは、9を押してください。", language: "ja-jp"
       end
     end.text
 
@@ -61,10 +65,13 @@ class TwimlController < ApplicationController
   end
 
   def confirm_product
-
     xml_str = Twilio::TwiML::Response.new do |response|
       if params[:Digits].to_s == '1'
-        # 裁縫ユーザー
+
+        # 注文処理
+        @current_caller_user.orders.create(product: params_pruduct, count: params_count, confirm_finished: false)
+
+        # 再訪ユーザー
         if @current_caller_user.zip
           response.Redirect "#{Setting.app_host}/twiml/ask_order", method: 'GET'
         else
@@ -170,6 +177,7 @@ class TwimlController < ApplicationController
     xml_str = Twilio::TwiML::Response.new do |response|
       response.Gather timeout: 30, finishOnKey: '', numDigits: 1, action: "#{Setting.app_host}/twiml/confirm_order", method: 'GET' do |gather|
         gather.Say " ご注文を 確認いたします。", language: "ja-jp"
+        gather.Say " #{@current_caller_user.orders.last.product.name_read} 、を、 #{@current_caller_user.orders.last.count} 個、ですね。 ", language: "ja-jp"
         gather.Say " よろしければ、1を。 修正したいかたは、9を押してください。", language: "ja-jp"
       end
     end.text
@@ -190,8 +198,10 @@ class TwimlController < ApplicationController
   end
 
   def finish
+    @current_caller_user.orders.last.update(confirm_finished: true)
+
     xml_str = Twilio::TwiML::Response.new do |response|
-      response.Say "ご注文ありがとうございました。　　　　のちほど ショップから 確認の電話をすることがあります。 ", language: "ja-jp"
+      response.Say "ご注文ありがとうございました。 のちほど ショップから 確認の電話をすることがあります。 ", language: "ja-jp"
     end.text
 
     render xml: xml_str
@@ -207,6 +217,10 @@ class TwimlController < ApplicationController
 
   def params_pruduct
     @_product ||= Product.find_by(id: (params[:product_id] || params[:Digits]))
+  end
+
+  def params_count
+    params[:count] || params[:Digits]
   end
 
   def _log_(obj)
