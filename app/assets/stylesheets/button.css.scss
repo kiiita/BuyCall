@@ -1,7 +1,11 @@
 @import 'module/module';
 
 .round-list {
-  border: 1px solid $main-color;
-  padding: 3px 6px;
-  @include border_radius(20px);
+  font-size: 12px;
+}
+
+.btn-gray {
+    background-color: #eee;
+    color: $main_color;
+    border: 1px solid $main_color!important;
 }

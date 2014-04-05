@@ -1,8 +1,6 @@
-h1 Editing product
-
-== render 'form'
-
-= link_to 'Show', @product
-'|
-= link_to 'Back', products_path
+.container.new-product
+  h1 Editing product
+  .edit-product__form
+    == render 'form'
+  = link_to '管理画面に戻る', products_path
 

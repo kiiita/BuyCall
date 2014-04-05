@@ -11,12 +11,23 @@
     }
     a {
       color: #fff;
+      font-family: 'Norican', cursive;
     }
   }
   .collapse {
     .navbar-nav {
       li {
         color: #fff!important;
+      }
+    }
+  }
+  .navbar-collapse {
+    background-color: $second_color;
+    .navbar-nav {
+      > li {
+        > a {
+          color: #fff;
+        }
       }
     }
   }
