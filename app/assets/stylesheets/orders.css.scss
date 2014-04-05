@@ -5,6 +5,7 @@
 @import  'module/module';
 
 .manage {
+  margin-bottom: 80px;
   > h1, 
   > .btn {
     display: inline-block;
@@ -16,6 +17,7 @@
   .btn {
     background-color: #eee;
     color: $main_color;
+    border: 1px solid $main_color;
     margin-left: 40px;
   }
   hr {
