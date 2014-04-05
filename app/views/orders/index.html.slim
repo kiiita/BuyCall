@@ -1,20 +1,23 @@
 .container
-  br
+  h1 管理画面
   = link_to('新しい商品を追加', new_order_path, class: "btn btn-primary")
-  h1 Listing orders
 
-  table
-    tr
-      th User
-      th Product
-      th
-      th
-      th
-
+  hr
+  h2 menu 
+  .items
     - @orders.each do |order|
-      tr
-        td = order.user_id
-        td = order.product_id
-        td = link_to 'Show', order
-        td = link_to 'Edit', edit_order_path(order)
-        td = link_to 'Destroy', order, data: {:confirm => 'Are you sure?'}, :method => :delete
+      .items__box
+        .items__box__header
+          p.round-list 商品ID
+          p = order.user_id
+          p.round-list 商品名
+          p = order.product_id
+        .items__box__body
+          h3 購入者一覧
+          .items__box__body__person
+            p ヤマダタロウ
+            p 1個
+        .items__box__footer
+          p = link_to '詳細を見る', order
+          p = link_to '商品情報を変更する', edit_order_path(order)
+          p = link_to '出品を停止する', order, data: {:confirm => 'Are you sure?'}, :method => :delete

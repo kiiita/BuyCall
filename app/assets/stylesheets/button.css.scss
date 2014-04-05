@@ -1,0 +1,7 @@
+@import 'module/module';
+
+.round-list {
+  border: 1px solid $main-color;
+  padding: 3px 6px;
+  @include border_radius(20px);
+}
