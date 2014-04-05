@@ -29,6 +29,12 @@
         p {
           display: inline-block;
         }
+        p.purchased-size {
+          border: 1px solid $line_color;
+          padding: 1px 3px;
+          @include border_radius(6px);
+          margin-left: 4px;
+        }
       }
 
     }
