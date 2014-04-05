@@ -1,0 +1,23 @@
+@import  'module/module';
+
+.navbar-inverse {
+  position: absolute;
+  top: 0;
+  background-color: $main_color!important;
+  border: 1px solid $main_color;
+  .navbar-header {
+    .navbar-toggle {
+      border-color: #fff;
+    }
+    a {
+      color: #fff;
+    }
+  }
+  .collapse {
+    .navbar-nav {
+      li {
+        color: #fff!important;
+      }
+    }
+  }
+}

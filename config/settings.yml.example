@@ -1,0 +1,14 @@
+defaults: &defaults
+  twilio:
+    caller_id: '+8100000000'
+    account_sid: 'xxxxxxxxxxxxxxxxxxxxxxxx'
+    auth_token: 'xxxxxxxxxxxxxxxxxxxxx'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
