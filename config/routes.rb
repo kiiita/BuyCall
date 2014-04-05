@@ -9,7 +9,6 @@ Buycall::Application.routes.draw do
   root :to => 'products#index'
 
   resources :products
-  resources :orders
 
   get "twiml/start"
   get "twiml/ask_shop"
