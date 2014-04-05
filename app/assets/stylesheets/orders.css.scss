@@ -4,6 +4,13 @@
 
 @import  'module/module';
 
+.items {
+  a:hover {
+    text-decoration: none;
+    color: $main_color;
+  }
+}
+
 .orders-list {
   position: relative;
   .status {
@@ -14,5 +21,41 @@
     padding: 3px 6px;
     @include border_radius;
     color: #fff;
+  }
+  .round-list {
+    color: #000;
+  }
+}
+
+.orders-show {
+  .items {
+    h2,
+    .status {
+      display: inline-block;
+    }
+    .status {
+      position: relative;
+      bottom: 3px;
+      background-color: #eee;
+      padding: 3px 6px;
+      @include border_radius;
+      color: $main_color;
+      border: 1px solid $main_color!important;
+      margin-left: 10px;
+      p {
+        margin:0;
+      }
+    }
+    .items__box {
+      .items__box__body {
+        .items__box__body__details {
+          border-bottom: 1px solid $line_color;  
+          padding: 5px 0;
+          &:last-child {
+            border-bottom: 0px solid #fff; 
+          }
+        } 
+      } 
+    }
   }
 }

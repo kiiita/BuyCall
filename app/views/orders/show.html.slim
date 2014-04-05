@@ -1,17 +1,22 @@
-.container
+.container.orders-show
   h1 注文リスト
   .items
-    h2 出品リスト一覧 
+    h2 商品ID#{@orders.product_id}の詳細 
+    .status
+      p 未発送
     .items__box
       .items__box__header
-        p.round-list 商品ID
-        p = @orders.product_id
-        br
-        .status
-          p 未発送
+        p.round-list 注文者名
+        p = @orders.user.name
       .items__box__body
-          p.round-list 商品名
-          p = @orders.user.name
+        .items__box__body__details
+          p.round-list 注文された商品
           p = @orders.product.name
-          p = @orders.product.count
-      .items__box__footer
+        .items__box__body__details
+          p.round-list 商品価格
+          p #{@orders.product.price}円
+        .items__box__body__details
+          p.round-list 注文個数
+          p #{@orders.count}個
+
+    a href="#{orders_path}" 戻る
