@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require bootstrap
+ *= require basic.css.scss
  *= require custom.css.scss
  *= require normalize.css
  */
