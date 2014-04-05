@@ -1,10 +1,9 @@
-.container
+.container.manage
   h1 管理画面
   = link_to('新しい商品を追加', new_product_path, class: "btn btn-primary")
-
   hr
-  h2 menu 
   .items
+    h2 出品リスト
     - @orders.each do |order|
       .items__box
         .items__box__header
@@ -18,6 +17,5 @@
             p ヤマダタロウ
             p.purchased-size 1個
         .items__box__footer
-          p = link_to '詳細を見る', order
           p = link_to '商品情報を変更する', edit_product_path(order)
           p = link_to '出品を停止する', order, data: {:confirm => 'Are you sure?'}, :method => :delete
