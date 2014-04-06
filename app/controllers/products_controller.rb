@@ -26,15 +26,11 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
 
-    respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @product }
+        redirect_to products_path
       else
-        format.html { render action: 'new' }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+        redirect_to new_product_path
       end
-    end
   end
 
   # PATCH/PUT /products/1

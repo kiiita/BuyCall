@@ -17,14 +17,17 @@ ActiveRecord::Schema.define(version: 20140405055756) do
     t.integer  "user_id",                          null: false
     t.integer  "product_id",                       null: false
     t.integer  "count",            default: 1,     null: false
-    t.boolean  "confirm_finished", default: false
+    t.boolean  "confirm_finished", default: false, null: false
+    t.boolean  "newly_added",      default: false, null: false
+    t.boolean  "shipped",          default: false, null: false
+    t.boolean  "money_received",   default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "products", force: true do |t|
     t.string   "name",                   null: false
-    t.string   "name_read"
+    t.string   "name_read",              null: false
     t.integer  "price",                  null: false
     t.integer  "count",      default: 1, null: false
     t.datetime "created_at"
