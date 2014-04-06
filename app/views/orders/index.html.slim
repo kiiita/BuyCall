@@ -1,18 +1,30 @@
 .container
-  h1 注文リスト
   .items
-    h2 出品リスト一覧 
+    h2 受注リスト一覧 
     - @orders.each do |order|
-      .items__box
-        .items__box__header
-          p.round-list 商品ID
-          p = order.product_id
-          br
-          .status
-            p 未発送
-        .items__box__body
-            p.round-list 商品名
-            p = order.user.name
-            p = order.product.name
-            p = order.product.count
-        .items__box__footer
+      a href="#{order_path(order)}"
+        .items__box
+          .items__box__body.orders-list
+            p.round-list 注文ID
+            p = order.product_id
+            p.round-list 注文者の氏名
+            - if order.user.name.present?
+              p = order.user.name
+            - else 
+              p.attention 氏名未入力*
+            .status-wrapper
+              - if order.newly_added === true
+                .status.colored
+                  p 新着
+              - if order.money_received === false
+                .status
+                  p 入金待ち
+              - else
+                .status.colored
+                  p 入金済み
+              - if order.shipped === false
+                .status
+                  p 未発送
+              - else
+                .status.colored
+                  p 発送済み
