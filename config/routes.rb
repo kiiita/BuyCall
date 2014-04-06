@@ -4,13 +4,15 @@ Buycall::Application.routes.draw do
   resources :products
   resources :orders
 
-  get "orders", :to => "orders#index"
-
   get "twiml/start"
 
   get "twiml/ask_product"
   get "twiml/receive_product"
-  get "twiml/confirm_product/:product_id" => 'twiml#confirm_product'
+
+  get "twiml/ask_count/:product_id" => 'twiml#ask_count'
+  get "twiml/receive_product_and_count/:product_id" => 'twiml#receive_product_and_count'
+
+  get "twiml/confirm_product/:product_id/:count" => 'twiml#confirm_product'
 
   get "twiml/ask_name"
   get "twiml/receive_name"

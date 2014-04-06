@@ -1,0 +1,55 @@
+.container.orders-show
+  .items
+    h2 商品ID#{@orders.product_id}（#{@orders.product.name}）の詳細 
+    .orders-show__check-status
+      = form_for @order do |f|
+        - if @order.errors.any?
+          #error_explanation
+            h2 = "#{pluralize(@order.errors.count, "error")} prohibited this product from being saved:"
+            ul
+              - @order.errors.full_messages.each do |message|
+                li = message
+
+        .field
+          = f.label :money_received, "入金済み"
+          = f.check_box :money_received
+        .field
+          = f.label :shipped, "発送済み"
+          = f.check_box :shipped
+        .actions = f.submit '変更する', class: "btn"
+    .items__box
+      .items__box__header
+        p.round-list 注文者名
+        p = @orders.user.name
+      .items__box__body
+        .items__box__body__details
+          p.round-list 注文された商品
+          p = @orders.product.name
+        .items__box__body__details
+          p.round-list 商品価格
+          p #{@orders.product.price}円
+        .items__box__body__details
+          p.round-list 注文個数
+          p #{@orders.count}個
+        .items__box__body__details
+          p.round-list 発送先
+          p 
+            | #{@orders.user.address1} 
+            - if @orders.user.address2.present? 
+              | #{@orders.user.address2}
+            - else 
+              | （住所未入力*）
+        .items__box__body__details
+          p.round-list 顧客電話番号
+          p #{@orders.user.tel}
+        .items__box__body__details
+          p.round-list 注文された日時
+          p = @orders.created_at.to_date
+      .items__box__footer
+        .items__box__body__details
+          a href="#{@orders.user.name_voice_url}" 顧客の氏名を確認する
+        .items__box__body__details
+          a href="#{@orders.user.address2_voice_url}" 顧客の住所を確認する
+
+    .back-btn 
+      a href="#{orders_path}" 戻る

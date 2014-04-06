@@ -10,6 +10,8 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
+    @orders = Order.find(params[:id])
+    @orders.update newly_added: false
   end
 
   # GET /orders/new
@@ -69,6 +71,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:user_id, :product_id)
+      params.require(:order).permit(:user_id, :product_id, :shipped, :newly_added, :money_received)
     end
 end

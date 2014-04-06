@@ -15,6 +15,8 @@
           p = product.name
           p.round-list 出品数
           p = product.count
+          p.round-list 残り数
+          p = product.stock_quantity
         .items__box__footer
           p = link_to '商品情報を変更する', edit_product_path(product)
           p = link_to '出品を停止する', product, data: {:confirm => '一度削除するともとに戻すことはできません。出品を停止してもよろしいでしょうか？'}, :method => :delete
