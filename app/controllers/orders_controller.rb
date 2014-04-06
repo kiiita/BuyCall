@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
   def show
     @orders = Order.find(params[:id])
     @orders.update newly_added: false
+    @user_name = @orders.user.name.present?? @orders.user.name : '未入力'
   end
 
   # GET /orders/new
