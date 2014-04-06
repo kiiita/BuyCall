@@ -16,7 +16,8 @@ gem 'jbuilder', '~> 1.2'
 gem 'settingslogic'
 gem 'twilio-ruby'
 gem 'rb-readline'
-gem 'webpay'
+# gem 'webpay'
+gem 'capistrano', '~> 3.1.0'
 
 group :doc do
   gem 'sdoc', require: false
