@@ -46,13 +46,13 @@
     vertical-align: middle;
   }
   h1 {
-    font-size: 24px;
+    font-size: 20px;
   }
   .btn {
     background-color: #eee;
     color: $main_color;
     border: 1px solid $main_color;
-    margin-left: 40px;
+    margin-left: 130px;
   }
   hr {
     margin: 10px 0 30px 0;
@@ -116,4 +116,25 @@
   
     }
   }
+}
+
+.bread {
+  text-align: center;
+}
+
+a.breadcrumb {
+  font-size: 12px;
+  color: $main_color;
+  border: 0px solid #fff;
+  background-color: transparent;
+  padding:0;
+}
+
+a.current {
+  color: #aaa;
+}
+
+a.bar {
+  color: #333;
+  margin: 0 4px;
 }

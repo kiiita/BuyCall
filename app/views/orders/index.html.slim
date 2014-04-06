@@ -1,4 +1,10 @@
-.container
+.container.manage
+  h1 田尾商店様
+  .bread
+    a.breadcrumb href="/products" 出品リスト
+    a.bar | 
+    a.breadcrumb.current href="#" 受注リスト
+  hr
   .items
     h2 受注リスト一覧 
     - @orders.each do |order|

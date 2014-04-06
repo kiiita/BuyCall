@@ -1,6 +1,11 @@
 .container.manage
-  h1 管理画面
+  h1 田尾商店様
   = link_to('新しい商品を追加', new_product_path, class: "btn btn-primary")
+  br
+  .bread
+    a.breadcrumb.current href="#" 出品リスト
+    a.bar | 
+    a.breadcrumb href="/orders" 受注リスト
   hr
   .items
     h2 出品リスト一覧 
