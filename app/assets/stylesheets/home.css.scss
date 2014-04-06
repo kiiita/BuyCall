@@ -22,8 +22,22 @@
 }
 
 .home-container {
-  height: 100%;
-  background-image: url(home-img.jpg);
-  background-position: center center;
-  background-size: cover;
+  width: 100%;
+  height: 500px;
+  position: absolute;
+  top: 50px;
+  left: 0;
+}
+
+.home-img {
+  img {
+    position: absolute;
+    top: 0px;
+    left: -280px;
+    opacity: .4;
+    height: 150%;
+    background-image: url(home-img.jpg);
+    background-position: center center;
+    background-size: cover;
+  }
 }
