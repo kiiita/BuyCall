@@ -56,7 +56,7 @@ class TwimlController < ApplicationController
   def receive_product_and_count
     xml_str = Twilio::TwiML::Response.new do |response|
       response.Gather timeout: 30, finishOnKey: '', numDigits: 1, action: "#{Setting.app_host}/twiml/confirm_product/#{params_pruduct.id}/#{params_count}", method: 'GET' do |gather|
-        gather.Say " ご注文 は、#{params_pruduct.name_read}。個数 は #{params_count}個、ですね。", language: "ja-jp"
+        gather.Say " ご注文 は、#{params_pruduct.name_read}。 個数 は #{params_count}個、ですね。", language: "ja-jp"
         gather.Say " よろしければ、1を。 修正したいかたは、9を押してください。", language: "ja-jp"
       end
     end.text
@@ -178,7 +178,7 @@ class TwimlController < ApplicationController
     xml_str = Twilio::TwiML::Response.new do |response|
       response.Gather timeout: 30, finishOnKey: '', numDigits: 1, action: "#{Setting.app_host}/twiml/confirm_order", method: 'GET' do |gather|
         gather.Say " ご注文を 確認いたします。", language: "ja-jp"
-        gather.Say " ご注文 は、#{@current_caller_user.orders.last.product.name_read}　。個数 は #{@current_caller_user.orders.last.count} 個　。　お会計は、#{sum}、ですね。 ", language: "ja-jp"
+        gather.Say " ご注文 は、#{@current_caller_user.orders.last.product.name_read}　。個数 は #{@current_caller_user.orders.last.count} 個　。　お会計は、#{sum}、円、ですね。 ", language: "ja-jp"
         gather.Say " よろしければ、1を。 修正したいかたは、9を押してください。", language: "ja-jp"
       end
     end.text
