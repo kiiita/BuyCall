@@ -1,10 +1,10 @@
 # coding: utf-8
-u1 = User.create(tel: '+818046771897' ,
+u1 = User.create(tel: '+818046775597' ,
                  name: 'ヤマダタロウ',
                  zip: '2720142',
                  address1: '南行徳',
                  address2: '２−３−１１')
-u2 = User.create(tel: '+818043341222' ,
+u2 = User.create(tel: '+818043341552' ,
                  name: nil,
                  name_voice_url: 'http://api.twilio.com/2010-04-01/Accounts/ACb79305fdebd8ec100e0c9ef23170262a/Recordings/REa8d3c4411fb509cabe631e04ba87bb1b',
                  zip: '2720142',
