@@ -6,7 +6,7 @@
         .items__box
           .items__box__body.orders-list
             p.round-list 注文ID
-            p = order.product_id
+            p = order.id
             p.round-list 注文者の氏名
             - if order.user.name.present?
               p = order.user.name

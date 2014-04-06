@@ -1,6 +1,6 @@
 .container.orders-show
   .items
-    h2 商品ID#{@orders.product_id}（#{@orders.product.name}）の詳細 
+    h2 注文ID#{@orders.id}の詳細 
     .orders-show__check-status
       = form_for @order do |f|
         - if @order.errors.any?
@@ -24,7 +24,7 @@
       .items__box__body
         .items__box__body__details
           p.round-list 注文された商品
-          p = @orders.product.name
+          p #{@orders.product.name} （ID: #{@order.product_id}）
         .items__box__body__details
           p.round-list 商品価格
           p #{@orders.product.price}円
