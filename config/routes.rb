@@ -32,5 +32,5 @@ Buycall::Application.routes.draw do
 
   get 'twiml/finish'
 
-  get 'aitalk' => 'aitalk#play'
+  get 'aitalk/play' => 'aitalk#play', as: 'aitalk'
 end
