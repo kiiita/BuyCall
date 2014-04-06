@@ -13,22 +13,63 @@
 
 .orders-list {
   position: relative;
-  .status {
+  p.attention {
+    font-weight: 900;
+    color: $main_color;
+  }
+  p.round-list {
+    color: #000;
+  }
+  .status-wrapper {
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: $main_color;
-    padding: 3px 6px;
-    @include border_radius;
-    color: #fff;
-  }
-  .round-list {
-    color: #000;
+    .status {
+      text-align: center;
+      border: 1px solid $main_color;
+      color: $main_color;
+      padding: 2px 4px;
+      @include border_radius;
+      margin-bottom: 5px;
+      font-size: 11px;
+    }
+    .status.colored {
+      background-color: $main_color;
+      color: #fff;
+    }
+    .round-list {
+      color: #000;
+    }
   }
 }
 
 .orders-show {
   .items {
+    .orders-show__check-status {
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      .field,
+      .actions {
+        display: inline-block;
+        margin-right: 10px;
+      }
+      .field {
+        label {
+          font-weight: 100;
+          margin-right: 2px;
+        }
+      }
+      .actions {
+        .btn {
+          padding: 3px 6px; 
+          background-color: #eee;
+          color: $main_color;
+          border: 1px solid $main_color;
+          margin-left: 15px;
+        }
+      }
+    }
     h2,
     .status {
       display: inline-block;
@@ -56,6 +97,26 @@
           }
         } 
       } 
+      .items__box__footer {
+        background-color: #eee;
+        p {
+          &:after {
+            content: "";
+          } 
+        }
+      }
+    }
+  }
+  .back-btn {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    a {
+      background-color: $main_color;
+      padding: 6px 12px;
+      @include border_radius;
+      margin: 0 auto;
+      color: #fff;
     }
   }
 }
