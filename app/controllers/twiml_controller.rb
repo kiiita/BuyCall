@@ -1,3 +1,5 @@
+require 'uri'
+
 class TwimlController < ApplicationController
 
   protect_from_forgery with: :null_session
@@ -7,7 +9,9 @@ class TwimlController < ApplicationController
   # Twilioの最初
   def start
     xml_str = Twilio::TwiML::Response.new do |response|
-      response.Say "こちらは、バイ コールです。 案内 を 開始します。", language: "ja-jp"
+      # response.Say "こちらは、バイ コールです。 案内 を 開始します。", language: "ja-jp"
+      p aitalk_url('こちらは、バイコールです。 案内を開始します。')
+      response.Play aitalk_url('こちらは、バイ コールです。 案内 を 開始します。')
       response.Redirect "#{Setting.app_host}/twiml/ask_product", method: 'GET'
     end.text
 
@@ -224,8 +228,8 @@ class TwimlController < ApplicationController
     params[:count] || params[:Digits]
   end
 
-  def _log_(obj)
-    puts "\n***#{obj.to_s}***\n"
+  def aitalk_url(text)
+    "http://tts.exaitalk.net/webtts/tts/ttsget.php?username=#{Setting.aitalk.username}&password=#{Setting.aitalk.password}&speaker_id=#{Setting.aitalk.speaker_id}&text=#{URI.escape(text)}"
   end
 
 end
