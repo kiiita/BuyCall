@@ -4,6 +4,10 @@ defaults: &defaults
     caller_id: '+8100000000'
     account_sid: 'xxxxxxxxxxxxxxxxxxxxxxxx'
     auth_token: 'xxxxxxxxxxxxxxxxxxxxx'
+  aitalk:
+    username: 'xxxxxxxxx'
+    password: 'xxxxxxxxx'
+    speaker_id: 1
 
 development:
   <<: *defaults
