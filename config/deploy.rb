@@ -6,7 +6,6 @@ set :repo_url, 'git@github.com:kiiita/BuyCall.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
-set :branch, 'twilio'
 
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/var/www/buycall'
@@ -61,5 +60,17 @@ namespace :deploy do
       # end
     end
   end
+
+  desc 'Reset DB'
+  task :reset_db do
+    on roles(:app), in: :sequence, wait: 5 do
+      # Your restart mechanism here, for example:
+      within release_path do
+        execute :rake, "db:migrate:reset RAILS_ENV=#{fetch(:rails_env)}"
+        execute :rake, "db:seed RAILS_ENV=#{fetch(:rails_env)}"
+      end
+    end
+  end
+  after :reset_db, :restart
 
 end

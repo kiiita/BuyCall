@@ -8,6 +8,8 @@ role :app, %w{buycall}
 role :web, %w{buycall}
 role :db,  %w{buycall}
 
+set :rails_env, 'production'
+
 # Extended Server Syntax
 # ======================
 # This can be used to drop a more detailed server
